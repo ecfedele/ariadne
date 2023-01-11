@@ -2,3 +2,17 @@
 # --------------------------------------------------------------------------------------------------------------- #
 Scratch/
 Scratch/*
+
+# Ignore LaTeX temp files, such as *.aux, *.bbl, etc.
+# --------------------------------------------------------------------------------------------------------------- #
+Documentation/Thesis/*.aux
+Documentation/Thesis/*.bbl
+Documentation/Thesis/*.bcf
+Documentation/Thesis/*.lof
+Documentation/Thesis/*.lot
+Documentation/Thesis/*.nlg
+Documentation/Thesis/*.nlo
+Documentation/Thesis/*.nls
+Documentation/Thesis/*.run.xml
+Documentation/Thesis/*.synctex.gz
+Documentation/Thesis/*.toc
