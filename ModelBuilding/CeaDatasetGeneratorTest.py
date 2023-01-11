@@ -5,7 +5,7 @@
 # ║ Author:      Elijah Creed Fedele                                                                              ║
 # ║ Date:        January 10, 2023                                                                                 ║
 # ║ Description: Small unit test file which tests the input domain generation of CeaDatasetGenerator and performs ║
-# ║              exemplary plotting of the data generated.
+# ║              exemplary plotting of the data generated.                                                        ║
 # ╠═══════════════════════════════════════════════════════════════════════════════════════════════════════════════╣
 # ║ Copyright (C) 2023 Elijah Creed Fedele                                                                        ║
 # ║                                                                                                               ║

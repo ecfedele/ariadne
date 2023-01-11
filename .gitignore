@@ -1,0 +1,4 @@
+# Ignore the Scratch/ folder and its contents, as this is for planning use and half-baked ideas
+# --------------------------------------------------------------------------------------------------------------- #
+Scratch/
+Scratch/*
