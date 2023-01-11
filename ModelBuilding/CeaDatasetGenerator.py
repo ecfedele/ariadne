@@ -87,6 +87,12 @@ class CeaDatasetGenerator:
                 (molar_mass_chamber, molar_mass_throat, molar_mass_exit) = self.get_molar_masses(cea_fostr)
                 (adiabat_chamber, adiabat_throat, adiabat_exit) = self.get_adiabat(cea_fostr)
                 (temperature_chamber, temperature_throat, temperature_exit) = self.get_temperatures(cea_fostr)
+                (rho_chamber, rho_throat, rho_exit) = self.cea.get_Densities(
+                                                          Pc=(pressure * 14.5038),
+                                                          MR=mixture,
+                                                          eps=area_ratio 
+                                                      )
+                mach_exit = self.cea.get_MachNumber(Pc=(pressure * 14.5038), MR=mixture, eps=area_ratio)
                 (spec_heat_chamber, visc_chamber, cond_chamber, prandtl_chamber) = self.cea.get_Chamber_Transport(
                                                                                        Pc=(pressure * 14.5038),
                                                                                        MR=mixture,
@@ -106,7 +112,12 @@ class CeaDatasetGenerator:
                                                         pressure_throat, pressure_exit, molar_mass_chamber, 
                                                         molar_mass_throat, molar_mass_exit, adiabat_chamber, 
                                                         adiabat_throat, adiabat_exit, temperature_chamber, 
-                                                        temperature_throat, temperature_exit ]
+                                                        temperature_throat, temperature_exit, rho_chamber, 
+                                                        rho_throat, rho_exit, spec_heat_chamber, spec_heat_throat, 
+                                                        spec_heat_exit, visc_chamber, visc_throat, visc_exit, 
+                                                        cond_chamber, cond_throat, cond_exit, prandtl_chamber, 
+                                                        prandtl_throat, prandtl_exit, mach_exit ]
+        return self.data
 
     ##
     #
