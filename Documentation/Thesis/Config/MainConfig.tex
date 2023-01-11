@@ -1,0 +1,66 @@
+% -------------------------------------------------------------------------------------------------------------------- %
+% TiKZ configuration and color setup                                                                                   %
+% -------------------------------------------------------------------------------------------------------------------- %
+\usetikzlibrary{calc,intersections,backgrounds,automata,positioning,patterns}
+\usetikzlibrary{decorations,shapes.misc,shapes.geometric,arrows}
+\definecolor{amber}{rgb}{0.99, 0.76, 0.0}
+\definecolor{fashionfuchsia}{rgb}{0.96, 0.0, 0.63}
+\tikzstyle{startstop} = [
+    rectangle,
+    rounded corners = 0.5cm,
+    minimum width = 7cm,
+    minimum height = 1cm,
+    text centered,
+    draw = black,
+    fill = white!60!red
+]
+\tikzstyle{io} = [
+    trapezium,
+    rounded corners = 0.15cm,
+    trapezium left angle = 70,
+    trapezium right angle = 110,
+    minimum width = 7cm,
+    minimum height = 1cm,
+    text centered,
+    draw = black,
+    fill = white!60!orange
+]
+\tikzstyle{process} = [
+    rectangle,
+    rounded corners = 0.15cm,
+    minimum width = 7cm,
+    minimum height = 1cm,
+    text centered,
+    draw = black,
+    fill = white!75!blue
+]
+\tikzstyle{decision} = [
+    diamond,
+    aspect = 3,
+    minimum width = 7cm,
+    minimum height = 1cm,
+    text centered,
+    draw = black,
+    fill = white!60!green
+]
+
+\definecolor{bluecite}{HTML}{0875b7}
+\hypersetup{
+    colorlinks     = true,
+    linkcolor      = bluecite, 
+	citecolor      = bluecite, 
+	urlcolor       = bluecite,
+	linktoc        = none
+}
+
+% -------------------------------------------------------------------------------------------------------------------- %
+% Hyperref (reference & figure linking) configuration                                                                  %
+% -------------------------------------------------------------------------------------------------------------------- %
+\definecolor{bluecite}{HTML}{0875b7}
+\hypersetup{
+    colorlinks     = true,
+    linkcolor      = bluecite, 
+	citecolor      = bluecite, 
+	urlcolor       = bluecite,
+	linktoc        = none
+}

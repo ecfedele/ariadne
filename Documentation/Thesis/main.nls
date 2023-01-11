@@ -1,0 +1,37 @@
+
+\begin{thenomenclature} 
+\nomgroup{A}
+  \item [{ASI}]\begingroup Augmented spark igniter\nomeqref {0}\nompageref{ii}
+  \item [{CEA}]\begingroup NASA \textit{Chemical Equilibrium with Applications} combustion code\nomeqref {0}\nompageref{ii}
+  \item [{IFV}]\begingroup Inlet fuel valve\nomeqref {0}\nompageref{ii}
+  \item [{IOV}]\begingroup Inlet oxidizer valve\nomeqref {0}\nompageref{ii}
+  \item [{JANNAF}]\begingroup Joint Army-Navy-NASA-Air Force working group\nomeqref {0}\nompageref{ii}
+  \item [{LOX}]\begingroup Liquid oxygen\nomeqref {0}\nompageref{ii}
+  \item [{MCC}]\begingroup Main combustion chamber\nomeqref {0}\nompageref{ii}
+  \item [{MFV}]\begingroup Main fuel valve\nomeqref {0}\nompageref{ii}
+  \item [{MOV}]\begingroup Main oxidizer valve\nomeqref {0}\nompageref{ii}
+  \item [{TCA}]\begingroup Thrust chamber assembly\nomeqref {0}\nompageref{ii}
+  \item [{TCV}]\begingroup Thrust control valve (in some contexts, \textit{turbine bypass valve} or \textit{TBV})\nomeqref {0}\nompageref{ii}
+  \item [{TDK}]\begingroup JANNAF \textit{Two-Dimensional Kinetics} combustion code\nomeqref {0}\nompageref{ii}
+  \item [{TVC}]\begingroup Thrust vector control\nomeqref {0}\nompageref{ii}
+\nomgroup{S}
+  \item [{$\Gamma$}]\begingroup Vandenkerckhove function\nomeqref {0}\nompageref{ii}
+  \item [{$\gamma$}]\begingroup Adiabatic index (ratio of specific heats; $\gamma = c_p / c_v$)\nomeqref {0}\nompageref{ii}
+  \item [{$\mathfrak{T}$}]\begingroup Thrust\nomeqref {0}\nompageref{ii}
+  \item [{$\varepsilon$}]\begingroup Expansion area ratio (at nozzle)\nomeqref {0}\nompageref{ii}
+  \item [{$\varepsilon_c$}]\begingroup Contraction area ratio (for combustion chamber)\nomeqref {0}\nompageref{ii}
+  \item [{$\varphi$}]\begingroup Propellant oxidizer-to-fuel mixture ratio\nomeqref {0}\nompageref{ii}
+  \item [{$c^*$}]\begingroup Characteristic velocity\nomeqref {0}\nompageref{ii}
+  \item [{$c_p$}]\begingroup Specific heat capacity (constant-pressure)\nomeqref {0}\nompageref{ii}
+  \item [{$c_v$}]\begingroup Specific heat capacity (constant-volume\nomeqref {0}\nompageref{ii}
+  \item [{$L^*$}]\begingroup Characteristic length for combustion chambers\nomeqref {0}\nompageref{ii}
+  \item [{$p$}]\begingroup Pressure\nomeqref {0}\nompageref{ii}
+  \item [{$T$}]\begingroup Temperature\nomeqref {0}\nompageref{ii}
+\nomgroup{X}
+  \item [{c}]\begingroup Combustion chamber (injector entry plane) (standard station)\nomeqref {0}\nompageref{ii}
+  \item [{e}]\begingroup Nozzle exit plane (standard station)\nomeqref {0}\nompageref{ii}
+  \item [{SL}]\begingroup Sea-level conditions\nomeqref {0}\nompageref{ii}
+  \item [{t}]\begingroup Throat plane (standard station)\nomeqref {0}\nompageref{ii}
+  \item [{vac}]\begingroup Vacuum conditions\nomeqref {0}\nompageref{ii}
+
+\end{thenomenclature}

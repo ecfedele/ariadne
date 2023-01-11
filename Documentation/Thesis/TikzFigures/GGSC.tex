@@ -1,0 +1,304 @@
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.495\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\tikzstyle{every node}=[font=\scriptsize]
+			
+			% Main engine structure
+			\draw (-1.000,0) -- ++(0,-0.793) arc (180:225:0.25) -- ++( 0.354,-0.354) arc (-315:-405:0.25) coordinate (L1);
+			\draw ( 1.000,0) -- ++(0,-0.793) arc (  0:-45:0.25) -- ++(-0.354,-0.354) arc ( 135: 225:0.25) coordinate (R1);
+			\path [name path=L1L2] (L1) -- ++(-135:1);
+			\path [name path=L2L3] (-1.500,-4.000) coordinate (L3) -- ++(75:2);
+			\path [name intersections={of=L1L2 and L2L3,by=L2}];
+			\draw (L1) .. controls (L2) .. (L3);
+			\path [name path=R1R2] (R1) -- ++(-45:1);
+			\path [name path=R2R3] (1.500,-4.000) coordinate (R3) -- ++(105:2);
+			\path [name intersections={of=R1R2 and R2R3,by=R2}];
+			\draw (R1) .. controls (R2) .. (R3);
+			\draw (-1.000,0) arc (180:360:1.000 and 0.500);
+			\draw (-0.500,-1.500) arc (180:360:0.500 and 0.250);
+			\draw (L3) arc (180:360:1.50 and 0.750);
+			\draw (-0.900,0) arc (180:360:0.900 and 0.450);
+			\draw (-0.900,0) -- ++(0,0.250);
+			\draw ( 0.900,0) -- ++(0,0.250);
+			\draw (-0.900,0.250) arc (180:360:0.900 and 0.450);
+			\draw (-0.900,0.250) arc (-180:-360:0.900 and 0.450);
+			\draw (-1.000,0) arc (-180:-270:0.100);
+			\draw (1.000,0) arc (0:90:0.100);
+			
+			% Turbine
+			\coordinate (TPT) at (3,3.000);
+			\draw (TPT) arc (180: 360:0.55 and 0.2525);
+			\draw (TPT) arc (-180:-360:0.55 and 0.2525) coordinate (temp0);
+			\draw (TPT)   -- ++(0,-0.3) coordinate (temp1L);
+			\draw (temp0) -- ++(0,-0.3) coordinate (temp1R);
+			\draw [name path=TPTS] (temp1L) arc (180:360:0.55 and 0.2525);
+			\path (temp1L) -- ++(0.4,-0.4) coordinate (temp2L);
+			\path (temp2L) -- ++( 0.3,0) coordinate (temp2R);
+			\draw (temp2L) arc (180:360:0.15 and 0.075);
+			\path (temp2L) -- ++(0.15,-0.075) coordinate (TPX);
+			\path [name path=TPCL] (temp2L) arc (0:90:0.4);
+			\path [name path=TPCR] (temp2R) arc (-180:-270:0.4);
+			\path (TPT)  -- ++(0,-0.7) coordinate (TCOL);
+			\path (TCOL) -- ++(1.1,0) coordinate (TCOR);
+			\path [name intersections={of=TPTS and TPCL,by=TCEL}];
+			\path [name intersections={of=TPTS and TPCR,by=TCER}];
+			\tkzDrawArc[color=black](TCOL,temp2L)(TCEL);
+			\tkzDrawArc[color=black](TCOR,TCER)(temp2R);
+			\draw [-stealth, fashionfuchsia, very thick] (TPX) -- (3.55,-3.9);
+			\node [anchor=west] at (4.15,2.85) {PT};
+			
+			% Gas generator
+			\coordinate (GGC) at (2.0,2.85);
+			\path (GGC) -- ++(0,-0.4) coordinate (GGS);
+			\path (GGC) -- ++(0,0.4) coordinate (GGN);
+			\draw (GGC) circle (0.4);
+			\draw (GGS) -- (GGN);
+			\node [anchor=south] at (GGN) {GG};
+			\path (GGC) -- ++(-0.8,-0.30) coordinate (GGOV);
+			\path (GGC) -- ++(-0.8,0.30) coordinate (GGFV);
+			\path (GGFV) -- ++(-0.20,0.10) coordinate (GGFVL);
+			\path (GGOV) -- ++(-0.20,-0.10) coordinate (GGOVL);
+			\draw (GGFV) -- ++(0,0.20) -- ++(-0.40,-0.40) -- ++(0,0.40) -- ++(0.40,-0.40) -- cycle;
+			\draw (GGOV) -- ++(0,0.20) -- ++(-0.40,-0.40) -- ++(0,0.40) -- ++(0.40,-0.40) -- cycle;
+			\node [anchor=south] at (GGFVL) {GGFV};
+			\node [anchor=north] at (GGOVL) {GGOV};
+			\path (GGFV) -- ++(-0.4,0) coordinate (GGFVI);
+			\path (GGOV) -- ++(-0.4,0) coordinate (GGOVI);
+			\draw [green, very thick] (GGFV) -- ++(0.8,0);
+			\draw [cyan,  very thick] (GGOV) -- ++(0.8,0);
+			\draw [fashionfuchsia, very thick] (GGC) -- ++(1,0);
+			
+			% Inlet valves and headers
+			\draw (-0.4,1.2) -- ++(0.2,0) -- ++(-0.4,0.4) -- ++(0.4,0) -- ++(-0.4,-0.4) -- cycle;
+			\draw ( 0.4,1.2) -- ++(0.2,0) -- ++(-0.4,0.4) -- ++(0.4,0) -- ++(-0.4,-0.4) -- cycle;
+			\node [anchor=east] at (-0.6, 1.4) {MFV};
+			\node [anchor=west] at (0.6, 1.4) {MOV};
+			\draw [green, very thick] (-0.4,1.2) -- (-0.4,0.25);
+			\draw [green, very thick] (-0.4,1.6) -- (-0.4,3.15);
+			\draw [green, very thick] (GGFVI)    -- (-0.4,3.15);
+			\draw [green, fill]       (-0.4,3.15) circle (0.075);
+			\draw [cyan,  very thick] ( 0.4,1.2) -- ( 0.4,0.25);
+			\draw [cyan,  very thick] ( 0.4,1.6) -- ( 0.4,3.50);
+			\draw [cyan,  very thick] (GGOVI)    -- ( 0.4,2.55);
+			\draw [cyan, fill]        ( 0.4,2.55) circle (0.075);
+			
+			% Regeneration circuit
+			\path [name path=RG1] (-0.644,-1.606) -- ++(-135:2);
+			\path [name path=RG2] (-1.580,-3.900) -- ++(74.7:2);
+			\path [name intersections={of=RG1 and RG2,by=RG}];
+			\draw [green, very thick] (-0.644,-1.606) .. controls (RG) .. (-1.580,-3.900);
+			\draw [green, very thick] (-1.674,-3.974) arc (270:344.7:0.101);
+			\draw [green, very thick] (-1.674,-3.974) -- (-2.0,-3.974) arc (-90:-180:0.500) coordinate (RGET);
+			\draw [green, very thick] (-0.644,-1.606) arc (315:405:0.15) -- ++(-0.354,0.354) arc (-135:-180:0.35) -- ++(0,0.5) -- (-1.4,-0.296) arc (-90:-180:0.25) -- (-1.65,3.15) arc (-180:-270:0.25) -- (-0.65,3.40) arc (-270:-360:0.25);
+			
+			% Turbopump fuel pump
+			\coordinate (FP) at (3.05,5.000);
+			\path (FP) -- ++(1,0) coordinate (FPR);
+			\path (FP) -- ++(0.4,0.6) coordinate (Ftemp2L);
+			\draw (FP) arc ( 180: 360:0.50 and 0.25);
+			\draw (FP) -- ++(0,0.2) coordinate (Ftemp1L);
+			\draw (FPR) -- ++(0,0.2) coordinate (Ftemp1R);
+			\draw (Ftemp1L) arc ( 180: 360:0.50 and 0.25);
+			\draw (Ftemp2L) arc ( 180: 360:0.10 and 0.05);
+			\path (Ftemp2L) -- ++(0.10,0.05) coordinate (FPI);
+			\draw (Ftemp2L) arc (-180:-360:0.10 and 0.05);
+			\draw (Ftemp2L) arc (   0: -90:0.4);
+			\path (Ftemp2L) -- ++(0.2,0) coordinate (Ftemp3);
+			\draw (Ftemp3) arc ( 180: 270:0.4);
+			\path (FP) -- ++(0,0.2) coordinate (Ftemp4);
+			\path (FPR) -- ++(0,0.2) coordinate (Ftemp5);
+			\draw (Ftemp4) arc (-180:-255:0.50 and 0.25);
+			\draw (Ftemp5) arc (   0:  75:0.50 and 0.25);
+			\draw [green, very thick] (FPI) -- ++(-3.7,0) arc (-90:-180:0.25) -- (-0.4,6.5); 
+			\draw [green, very thick] (3.05,5.100) -- (-0,5.1) -- ++(-2.25,0) arc (90:180:0.25) -- (RGET);
+			\node [anchor=west] at (4.15,5.1) {FP};
+			
+			% Turbopump oxidizer pump
+			\coordinate (OP) at (3.05,3.900);
+			\path (OP) -- ++(1,0) coordinate (OPR);
+			\path (OP) -- ++(0.4,0.6) coordinate (Otemp2L);
+			\draw (OP) arc ( 180: 360:0.50 and 0.25);
+			\draw (OP) -- ++(0,0.2) coordinate (Otemp1L);
+			\draw (OPR) -- ++(0,0.2) coordinate (Otemp1R);
+			\draw (Otemp1L) arc ( 180: 360:0.50 and 0.25);
+			\draw (Otemp2L) arc ( 180: 360:0.10 and 0.05);
+			\path (Otemp2L) -- ++(0.10,0.05) coordinate (OPI);
+			\path (OPI) -- ++(0,-0.05) coordinate (OPIC);
+			\draw (Otemp2L) arc (-180:-360:0.10 and 0.05);
+			\draw (Otemp2L) arc (   0: -90:0.4);
+			\path (Otemp2L) -- ++(0.2,0) coordinate (Otemp3);
+			\draw (Otemp3) arc ( 180: 270:0.4);
+			\path (OP) -- ++(0,0.2) coordinate (Otemp4);
+			\path (OPR) -- ++(0,0.2) coordinate (Otemp5);
+			\draw (Otemp4) arc (-180:-255:0.50 and 0.25);
+			\draw (Otemp5) arc (   0:  75:0.50 and 0.25);
+			\draw [very thick] (3.55,4.75) -- (OPIC);
+			\draw [very thick] (3.55,3.65) -- (3.55,3);
+			\draw [cyan, very thick] (OPI) -- ++(-2.9,0) arc (-90:-180:0.25) -- (0.4,6.5); 
+			\draw [cyan, very thick] (3.05,4.0) -- ++(-2.40,0) arc (90:180:0.25) -- (0.4,3.50);
+			\node [anchor=west] at (4.15,4.0) {OP};
+			
+			% Inlet valvework
+			\draw (-0.4,6.5) -- ++(0.2,0) -- ++(-0.4,0.4) -- ++(0.4,0) -- ++(-0.4,-0.4) -- cycle;
+			\draw ( 0.4,6.5) -- ++(0.2,0) -- ++(-0.4,0.4) -- ++(0.4,0) -- ++(-0.4,-0.4) -- cycle;
+			\draw [green, very thick] (-0.4,6.9) -- (-0.4,7.5);
+			\draw [cyan,  very thick] ( 0.4,6.9) -- ( 0.4,7.5);
+			\node [anchor=east] at (-0.6,6.7) {IFV};
+			\node [anchor=west] at ( 0.6,6.7) {IOV};
+			\node [anchor=south] at (-0.4,7.5) {Fuel};
+			\node [anchor=south] at (0.4,7.5) {Oxid.};
+		\end{tikzpicture}
+		\caption{Gas generator cycle (fuel-rich)}
+		\label{fig:GasGeneratorEngineBasicDiagram}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.495\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\tikzstyle{every node}=[font=\scriptsize]
+			
+			% Main engine structure
+			\draw (-1.000,0) -- ++(0,-0.793) arc (180:225:0.25) -- ++( 0.354,-0.354) arc (-315:-405:0.25) coordinate (L1);
+			\draw ( 1.000,0) -- ++(0,-0.793) arc (  0:-45:0.25) -- ++(-0.354,-0.354) arc ( 135: 225:0.25) coordinate (R1);
+			\path [name path=L1L2] (L1) -- ++(-135:1);
+			\path [name path=L2L3] (-1.500,-4.000) coordinate (L3) -- ++(75:2);
+			\path [name intersections={of=L1L2 and L2L3,by=L2}];
+			\draw (L1) .. controls (L2) .. (L3);
+			\path [name path=R1R2] (R1) -- ++(-45:1);
+			\path [name path=R2R3] (1.500,-4.000) coordinate (R3) -- ++(105:2);
+			\path [name intersections={of=R1R2 and R2R3,by=R2}];
+			\draw (R1) .. controls (R2) .. (R3);
+			\draw (-1.000,0) arc (180:360:1.000 and 0.500);
+			\draw (-0.500,-1.500) arc (180:360:0.500 and 0.250);
+			\draw (L3) arc (180:360:1.50 and 0.750);
+			\draw (-0.900,0) arc (180:360:0.900 and 0.450);
+			\draw (-0.900,0) -- ++(0,0.250);
+			\draw ( 0.900,0) -- ++(0,0.250);
+			\draw (-0.900,0.250) arc (180:360:0.900 and 0.450);
+			\draw (-0.900,0.250) arc (-180:-360:0.900 and 0.450);
+			\draw (-1.000,0) arc (-180:-270:0.100);
+			\draw (1.000,0) arc (0:90:0.100);
+			
+			% Turbopump turbine
+			\coordinate (TPT) at (-0.550,3.000);
+			\draw (TPT) arc (180: 360:0.55 and 0.2525);
+			\draw (TPT) arc (-180:-360:0.55 and 0.2525) coordinate (temp0);
+			\draw (TPT)   -- ++(0,-0.3) coordinate (temp1L);
+			\draw (temp0) -- ++(0,-0.3) coordinate (temp1R);
+			\draw [name path=TPTS] (temp1L) arc (180:360:0.55 and 0.2525);
+			\path (temp1L) -- ++(0.4,-0.4) coordinate (temp2L);
+			\path (temp2L) -- ++( 0.3,0) coordinate (temp2R);
+			\path (temp2L) -- ++(0.15,-0.075) coordinate (TPX);
+			\draw (temp2L) arc (180:360:0.15 and 0.075);
+			\path [name path=TPCL] (temp2L) arc (0:90:0.4);
+			\path [name path=TPCR] (temp2R) arc (-180:-270:0.4);
+			\path (TPT)  -- ++(0,-0.7) coordinate (TCOL);
+			\path (TCOL) -- ++(1.1,0) coordinate (TCOR);
+			\path [name intersections={of=TPTS and TPCL,by=TCEL}];
+			\path [name intersections={of=TPTS and TPCR,by=TCER}];
+			\tkzDrawArc[color=black](TCOL,temp2L)(TCEL);
+			\tkzDrawArc[color=black](TCOR,TCER)(temp2R);
+			\draw [amber, very thick] (TPX) -- (0,0.25);
+			\node [anchor=west] at (0.65,2.85) {PT};
+			
+			% Regeneration circuit
+			\path [name path=RG1] (-0.644,-1.606) -- ++(-135:2);
+			\path [name path=RG2] (-1.580,-3.900) -- ++(74.7:2);
+			\path [name intersections={of=RG1 and RG2,by=RG}];
+			\draw [green, very thick] (-0.644,-1.606) .. controls (RG) .. (-1.580,-3.900);
+			\draw [green, very thick] (-1.674,-3.974) arc (270:344.7:0.101);
+			\draw [green, very thick] (-1.674,-3.974) -- (-2.0,-3.974) arc (-90:-180:0.500) coordinate (RGET);
+			\draw [green, very thick] (-0.644,-1.606) arc (315:405:0.15) -- ++(-0.354,0.354) arc (-135:-180:0.35) -- ++(0,0.5) -- (-1.725,-0.296) arc (-90:-180:0.25) coordinate (RGO);
+			
+			% Preburner and control valves
+			\draw (-1.525,2.850) circle (0.4);
+			\draw (-1.525,2.450) -- ++(0,0.8) node [anchor=south] {PB};
+			\draw [amber, very thick] (-1.525,2.850) -- (-0.55,2.850);
+			\draw (-1.525,4.00) -- ++(0.2,0.2) -- ++(0,-0.4) -- ++(-0.4,0.4) -- ++(0,-0.4) -- cycle;
+			\draw [cyan, very thick] (-0.500,4.00) -- (-1.325,4.00);
+			\draw [cyan, very thick] (-1.725,4.00) arc (90:180:0.25) -- (-1.975,3.3) arc (180:270:0.25) -- (-1.525,3.05);
+			\draw [green, very thick] (-1.525,2.65) -- ++(-0.2,0) arc (90:180:0.25) -- ++(0,-0.5);
+			\draw (-1.975,1.9) -- ++(0.2,0) -- ++(-0.4,-0.4) -- ++(0.4,0) -- ++(-0.4,0.4) -- cycle;
+			\draw (-1.2375,0.65) -- ++(0.2,0.2) -- ++(0,-0.4) -- ++(-0.4,0.4) -- ++(0,-0.4) -- cycle;
+			\draw [green, very thick] (-1.0375,0.65) -- (-0.500,0.650);
+			\draw [green, very thick] (-1.4375,0.65) -- (-1.975,0.650);
+			\draw [green, very thick] (-1.975,1.5) -- (RGO);
+			\draw [green, fill] (-1.975,0.650) circle (0.075);
+			\draw [green, fill] (-0.500,0.650) circle (0.075);
+			\node [anchor=west] at (-1.775,1.7) {PBFV};
+			\node [anchor=south] at (-1.2375,0.85) {MFV};
+			\node [anchor=south] at (-1.525,4.20) {MOV}; 
+			
+			% Injection systems
+			\draw [green, very thick] (-0.500,0.650) arc (180:360:0.5 and 0.25);
+			\draw [green, very thick] (-0.500,0.650) -- ++(0,-0.300);
+			\draw [green, very thick] ( 0.500,0.650) -- ++(0,-0.300);
+			\path (0,0.650) -- ++(-0.224,-0.224) coordinate (F2);
+			\path (0,0.650) -- ++( 0.224,-0.224) coordinate (F3);
+			\draw [green, very thick] (F2) -- ++(0,-0.300);
+			\draw [green, very thick] (F3) -- ++(0,-0.300);
+			
+			% Turbopump fuel pump
+			\coordinate (FP) at (-0.50,5.000);
+			\path (FP) -- ++(1,0) coordinate (FPR);
+			\path (FP) -- ++(0.4,0.6) coordinate (Ftemp2L);
+			\draw (FP) arc ( 180: 360:0.50 and 0.25);
+			\draw (FP) -- ++(0,0.2) coordinate (Ftemp1L);
+			\draw (FPR) -- ++(0,0.2) coordinate (Ftemp1R);
+			\draw (Ftemp1L) arc ( 180: 360:0.50 and 0.25);
+			\draw (Ftemp2L) arc ( 180: 360:0.10 and 0.05);
+			\path (Ftemp2L) -- ++(0.10,0) coordinate (FPI);
+			\draw (Ftemp2L) arc (-180:-360:0.10 and 0.05);
+			\draw (Ftemp2L) arc (   0: -90:0.4);
+			\path (Ftemp2L) -- ++(0.2,0) coordinate (Ftemp3);
+			\draw (Ftemp3) arc ( 180: 270:0.4);
+			\path (FP) -- ++(0,0.2) coordinate (Ftemp4);
+			\path (FPR) -- ++(0,0.2) coordinate (Ftemp5);
+			\draw (Ftemp4) arc (-180:-255:0.50 and 0.25);
+			\draw (Ftemp5) arc (   0:  75:0.50 and 0.25);
+			\draw [green, very thick] (FPI) -- (0,6.5);
+			\draw [green, very thick] (-0.5,5.1) -- ++(-1.5,0) arc (90:180:0.5) -- (RGET);
+			\node [anchor=west] at (0.65,5.1) {FP};
+			
+			% Turbopump oxidizer pump
+			\coordinate (OP) at (-0.50,3.900);
+			\path (OP) -- ++(1,0) coordinate (OPR);
+			\path (OP) -- ++(0.4,0.6) coordinate (Otemp2L);
+			\draw (OP) arc ( 180: 360:0.50 and 0.25);
+			\draw (OP) -- ++(0,0.2) coordinate (Otemp1L);
+			\draw (OPR) -- ++(0,0.2) coordinate (Otemp1R);
+			\draw (Otemp1L) arc ( 180: 360:0.50 and 0.25);
+			\draw (Otemp2L) arc ( 180: 360:0.10 and 0.05);
+			\path (Otemp2L) -- ++(0.10,0.05) coordinate (OPI);
+			\path (OPI) -- ++(0,-0.05) coordinate (OPIC);
+			\draw (Otemp2L) arc (-180:-360:0.10 and 0.05);
+			\draw (Otemp2L) arc (   0: -90:0.4);
+			\path (Otemp2L) -- ++(0.2,0) coordinate (Otemp3);
+			\draw (Otemp3) arc ( 180: 270:0.4);
+			\path (OP) -- ++(0,0.2) coordinate (Otemp4);
+			\path (OPR) -- ++(0,0.2) coordinate (Otemp5);
+			\draw (Otemp4) arc (-180:-255:0.50 and 0.25);
+			\draw (Otemp5) arc (   0:  75:0.50 and 0.25);
+			\draw [very thick] (0,4.75) -- (OPIC);
+			\draw [very thick] (0,3.65) -- (0,3);
+			\node [anchor=west] at (0.65,4.0) {OP};
+			
+			% Inlet valvework
+			\draw (0,6.5) -- ++(0.2,0) -- ++(-0.4,0.4) -- ++(0.4,0) -- ++(-0.4,-0.4) -- cycle;
+			\draw (1.5,6.5) -- ++(0.2,0) -- ++(-0.4,0.4) -- ++(0.4,0) -- ++(-0.4,-0.4) -- cycle;
+			\draw [green, very thick] (0,6.9) -- (0,7.5);
+			\draw [cyan, very thick] (1.5,6.9) -- (1.5,7.5);
+			\draw [cyan, very thick] (OPI) -- ++(0.5,0) arc (270:360:1) -- (1.5,6.5);
+			\node [anchor=east] at (-0.2,6.7) {IFV};
+			\node [anchor=west] at (1.7,6.7) {IOV};
+			\node [anchor=south] at (0,7.5) {Fuel};
+			\node [anchor=south] at (1.5,7.5) {Oxidizer};
+		\end{tikzpicture}
+		\caption{Staged combustion (oxidizer-rich)}
+		\label{fig:StagedCombustionEngineBasicDiagram}
+	\end{subfigure}
+	\caption{The gas generator and staged combustion cycles}
+	\label{fig:gasgen_stagedcomb}
+\end{figure}

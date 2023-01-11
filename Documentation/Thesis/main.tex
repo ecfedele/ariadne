@@ -1,0 +1,43 @@
+\documentclass[project,strict]{erauthesis}
+\usepackage{ragged2e}
+\usepackage[version=4]{mhchem}
+\usepackage{array,tabularx,booktabs,multirow,multicol,makecell,lscape,longtable,pdflscape}
+\usepackage{caption,subcaption}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{tikz, circuitikz, tkz-euclide}
+\usepackage[style=chem-acs,doi=true,articletitle,chaptertitle,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+\bibliography{references.bib}
+
+\title{The Design and Implementation of the \textit{Ariadne} Rocket Engine Computer Analysis Utility}
+\author{Elijah Creed Fedele}
+\degreeName{Bachelor of Science}
+\majorName{Engineering}
+\date{January 2023}
+
+\input{Config/MainConfig}
+\makenomenclature
+
+\begin{document}
+
+    \maketitle
+    \pagenumbering{roman}
+    \abstrpath{Frontmatter/Abstract.tex}
+    \nomenpath{Frontmatter/Nomenclature.tex}
+    \tableofcontents
+    \RaggedRight\setlength{\parindent}{0.5in}
+    \pretolerance=4000
+    \tolerance=8000
+    \emergencystretch=0pt
+    \righthyphenmin=4
+    \lefthyphenmin=4
+
+    \chapter{Introduction}
+    \input{Content/Introduction}
+    
+    \cleardoublepage
+    \addcontentsline{toc}{chapter}{References}
+    \renewcommand\bibname{References}
+    \printbibliography
+
+\end{document}

@@ -1,0 +1,30 @@
+\nomenclatureentry{AASI@[{ASI}]\begingroup Augmented spark igniter\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{ACEA@[{CEA}]\begingroup NASA \textit{Chemical Equilibrium with Applications} combustion code\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{AIFV@[{IFV}]\begingroup Inlet fuel valve\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{AIOV@[{IOV}]\begingroup Inlet oxidizer valve\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{AJANNAF@[{JANNAF}]\begingroup Joint Army-Navy-NASA-Air Force working group\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{ALOX@[{LOX}]\begingroup Liquid oxygen\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{AMCC@[{MCC}]\begingroup Main combustion chamber\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{AMFV@[{MFV}]\begingroup Main fuel valve\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{AMOV@[{MOV}]\begingroup Main oxidizer valve\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{ATCA@[{TCA}]\begingroup Thrust chamber assembly\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{ATCV@[{TCV}]\begingroup Thrust control valve (in some contexts, \textit{turbine bypass valve} or \textit{TBV})\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{ATDK@[{TDK}]\begingroup JANNAF \textit{Two-Dimensional Kinetics} combustion code\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{ATVC@[{TVC}]\begingroup Thrust vector control\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$c_p$@[{$c_p$}]\begingroup Specific heat capacity (constant-pressure)\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$c_v$@[{$c_v$}]\begingroup Specific heat capacity (constant-volume\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$c^*$@[{$c^*$}]\begingroup Characteristic velocity\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$L^*$@[{$L^*$}]\begingroup Characteristic length for combustion chambers\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$p$@[{$p$}]\begingroup Pressure\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$T$@[{$T$}]\begingroup Temperature\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$\mathfrak{T}$@[{$\mathfrak{T}$}]\begingroup Thrust\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$\Gamma$@[{$\Gamma$}]\begingroup Vandenkerckhove function\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$\gamma$@[{$\gamma$}]\begingroup Adiabatic index (ratio of specific heats; $\gamma = c_p / c_v$)\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$\varepsilon$@[{$\varepsilon$}]\begingroup Expansion area ratio (at nozzle)\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$\varepsilon_c$@[{$\varepsilon_c$}]\begingroup Contraction area ratio (for combustion chamber)\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{S$\varphi$@[{$\varphi$}]\begingroup Propellant oxidizer-to-fuel mixture ratio\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{Xc@[{c}]\begingroup Combustion chamber (injector entry plane) (standard station)\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{Xe@[{e}]\begingroup Nozzle exit plane (standard station)\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{XSL@[{SL}]\begingroup Sea-level conditions\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{Xt@[{t}]\begingroup Throat plane (standard station)\nomeqref {0}|nompageref}{ii}
+\nomenclatureentry{Xvac@[{vac}]\begingroup Vacuum conditions\nomeqref {0}|nompageref}{ii}
