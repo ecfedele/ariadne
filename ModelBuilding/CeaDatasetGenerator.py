@@ -22,8 +22,10 @@
 # ║ <http://www.gnu.org/licenses/>.                                                                               ║
 # ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
 
-import numpy  as np
-import pandas as pd
+import re
+import numpy             as     np
+import pandas            as     pd
+from   rocketcea.cea_obj import CEA_Obj
 
 ## @class CeaDatasetGenerator
 #  Encapsulates logic which generates an exemplary training dataset using Monte Carlo methods and a statistically
@@ -43,10 +45,55 @@ class CeaDatasetGenerator:
     #
     #  @returns         None (constructor)
     def __init__(self, fuel, oxidizer, n=10000):
-        self.fuel     = fuel
-        self.oxidizer = oxidizer
-        self.elements = n
+        self.fuel       = fuel
+        self.oxidizer   = oxidizer
+        self.elements   = n
+        self.cea        = CEA_Obj(oxName=self.oxidizer, fuelName=self.fuel)
         (self.pressure, self.mixture, self.area_ratio) = self.__get_domains__()
+        self.input_data = self.get_input_dataframe()
+
+    ## Obtain CEA data for entire listed input domain (i.e. the dataframe contained in self.input_data).
+    #
+    #  @param self      The reference to the calling CeaDatasetGenerator object
+    #
+    #  @returns         A Pandas DataFrame consisting of the input domain plus CEA results
+    def get_cea_data(self):
+        pressure_throat     = []
+        pressure_exit       = []
+        molar_mass_chamber  = []
+        molar_mass_throat   = []
+        molar_mass_exit     = []
+        adiabat_chamber     = []
+        adiabat_throat      = []
+        adiabat_exit        = []
+        temperature_chamber = []
+        temperature_throat  = []
+        temperature_exit    = []
+        rho_chamber         = []
+        rho_throat          = []
+        rho_exit            = []
+        spec_heat_chamber   = []
+        spec_heat_throat    = []
+        spec_heat_exit      = []
+        visc_chamber        = []
+        visc_throat         = []
+        visc_exit           = []
+        cond_chamber        = []
+        cond_throat         = []
+        cond_exit           = []
+        prandtl_chamber     = []
+        prandtl_throat      = []
+        prandtl_exit        = []
+        
+        for index, row in self.input_data.iterrows():
+            cea_output = self.cea.get_full_cea_output(Pc=row['pressure'], 
+                                                      MR=row['mixture'], 
+                                                      eps=row['area_ratio'], 
+                                                      short_output=1, 
+                                                      show_transport=1, 
+                                                      pc_units='bar')
+            extraction_dict = self.__extract_properties__(cea_output)
+            
 
     ## Returns a Pandas DataFrame object consisting of the input domain selections.
     #
@@ -73,3 +120,38 @@ class CeaDatasetGenerator:
         phi = np.random.default_rng().uniform(low=phi_min, high=phi_max, size=self.elements)
         eps = np.random.default_rng().uniform(low=eps_min, high=eps_max, size=self.elements)
         return (pc, phi, eps)
+
+    ## Pseudo-private method which uses regular expressions to extract relevant thermodynamic parameters from CEA 
+    #  full output string.
+    #  
+    #  @param self       The reference to the calling CeaDatasetGenerator object
+    #  @param cea_string The full output string received from CEA_Obj.get_full_cea_output()
+    #
+    #  @returns          A dictionary consisting of relevant parameters for use by self.get_cea_data()
+    def __extract_properties__(self, cea_string):
+        pressure_results    = re.search(r"P, ATM\s*\d+.\d+\s*(\d+.\d+)\s*(\d+.\d+)", cea_string)
+        temperature_results = re.search(r"T, K\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_string)
+        molar_mass_results  = re.search(r"M, \(1/n\)\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_string)
+        adiabat_results     = re.search(r"GAMMAs\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_string)
+        pressure_throat     = float(pressure_results(1)) * 1.01325
+        pressure_exit       = float(pressure_results(2)) * 1.01325
+        molar_mass_chamber  = float(molar_mass_results(1))
+        molar_mass_throat   = float(molar_mass_results(2))
+        molar_mass_exit     = float(molar_mass_results(3))
+        adiabat_chamber     = float(adiabat_results(1))
+        adiabat_throat      = float(adiabat_results(2))
+        adiabat_exit        = float(adiabat_results(3))
+        temperature_chamber = float(temperature_results(1))
+        temperature_throat  = float(temperature_results(2))
+        temperature_exit    = float(temperature_results(3))
+        return { "pressure_throat":     pressure_throat, 
+                 "pressure_exit":       pressure_exit,
+                 "molar_mass_chamber":  molar_mass_chamber,
+                 "molar_mass_throat":   molar_mass_throat,
+                 "molar_mass_exit":     molar_mass_exit,
+                 "adiabat_chamber":     adiabat_chamber,
+                 "adiabat_throat":      adiabat_throat,
+                 "adiabat_exit":        adiabat_exit,
+                 "temperature_chamber": temperature_chamber,
+                 "temperature_throat":  temperature_throat,
+                 "temperature_exit":    temperature_exit }
