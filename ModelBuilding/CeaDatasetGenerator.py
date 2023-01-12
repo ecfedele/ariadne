@@ -65,7 +65,7 @@ class CeaDatasetGenerator:
                             "prandtl_chamber", "prandtl_throat", "prandtl_exit", "mach_exit" ]
         self.data       = pd.DataFrame(columns=col_names)
 
-    ## Fills out the self.data DataFrame to a size of self.elements with CEA data
+    ## Fills out the self.data DataFrame to a size of self.elements with CEA data.
     #
     #  @param self      The reference to the calling CeaDatasetGenerator object
     #
@@ -119,12 +119,29 @@ class CeaDatasetGenerator:
                                                         prandtl_throat, prandtl_exit, mach_exit ]
         return self.data
 
-    ##
+    ## Gets input domain from internal DataFrame. Primarily used in an older version of CeaDatasetGenerator;
+    #  incorporated to avoid breaking old unit tests.
     #
+    #  @param self      The reference to the calling CeaDatasetGenerator object
     #
+    #  @returns         A DataFrame consisting of the input domain data
+    def get_input_dataframe(self):
+        if (len(self.data.index) == 0) or (len(self.data.index) is None):
+            df = self.get_cea_data()
+        d = { "pressure":   self.data.loc[:, 'pressure'],
+              "mixture":    self.data.loc[:, 'mixture'],
+              "area_ratio": self.data.loc[:, 'area_ratio'] }
+        return pd.DataFrame(data=d)
+
+    ## Checks, using regular expressions, if the CEA result is valid. Receives a full output string ('cea_fostr') 
+    #  and scans for the term 'EXIT' (signifying all three standard engine stations were successfully computed) and
+    #  the word 'NaN', which indicates a computational error resulting in an invalid floating-point value. Presence
+    #  of the first ('EXIT') and absence of the second ('NaN') indicates a passed test. Failure to pass is a fail.
     #
+    #  @param self      The reference to the calling CeaDatasetGenerator object
+    #  @param cea_fostr The CEA full output string corresponding to the test conditions
     #
-    #
+    #  @returns         A Boolean value indicating whether the result is valid or not
     def is_valid_cea_result(self, cea_fostr):
         exit_regexp = re.search(r"EXIT", cea_fostr)
         nan_regexp  = re.search(r"NaN",  cea_fostr)
@@ -133,24 +150,25 @@ class CeaDatasetGenerator:
         else:
             return False
 
-    ##
+    ## Uses grouping regular expressions to extract the standard station pressures from the CEA full output.
     #
+    #  @param self      The reference to the calling CeaDatasetGenerator object
+    #  @param cea_fostr The CEA full output string corresponding to the test conditions
     #
-    #
-    #
-    #
+    #  @returns         A tuple consisting of the pressure at the engine throat and the pressure at nozzle exit
     def get_pressures(self, cea_fostr):
-        pressure_results = re.search(r"P, ATM\s*\d+.\d+\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
-        pressure_throat  = float(pressure_results(1)) * 1.01325
-        pressure_exit    = float(pressure_results(2)) * 1.01325
+        pressure_results = re.search(r"P, BAR\s*\d+.\d+\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
+        pressure_throat  = float(pressure_results(1))
+        pressure_exit    = float(pressure_results(2))
         return (pressure_throat, pressure_exit)
 
-    ##
+    ## Uses grouping regular expressions to extract the standard station molar masses from the CEA full output.
     #
+    #  @param self      The reference to the calling CeaDatasetGenerator object
+    #  @param cea_fostr The CEA full output string corresponding to the test conditions
     #
-    #
-    #
-    #
+    #  @returns         A tuple consisting of the molar masses of the exhaust stream at the three standard engine 
+    #                   stations
     def get_molar_masses(self, cea_fostr):
         molar_mass_results = re.search(r"M, \(1/n\)\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
         molar_mass_chamber = float(molar_mass_results(1))
@@ -158,12 +176,14 @@ class CeaDatasetGenerator:
         molar_mass_exit    = float(molar_mass_results(3))
         return (molar_mass_chamber, molar_mass_throat, molar_mass_exit)
 
-    ##
+    ## Uses grouping regular expressions to extract the standard station adiabatic indexes (ratios of specific 
+    #  heat) from the CEA full output.
     #
+    #  @param self      The reference to the calling CeaDatasetGenerator object
+    #  @param cea_fostr The CEA full output string corresponding to the test conditions
     #
-    #
-    #
-    #
+    #  @returns         A tuple consisting of the adiabatic indexes (ratios of specific heat) at the three standard
+    #                   engine stations
     def get_adiabat(self, cea_fostr):
         adiabat_results = re.search(r"GAMMAs\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
         adiabat_chamber = float(adiabat_results(1))
@@ -171,14 +191,15 @@ class CeaDatasetGenerator:
         adiabat_exit    = float(adiabat_results(3))
         return (adiabat_chamber, adiabat_throat, adiabat_exit)
 
-    ##
+    ## Uses grouping regular expressions to extract the standard station temperature values from the CEA full 
+    #  output.
     #
+    #  @param self      The reference to the calling CeaDatasetGenerator object
+    #  @param cea_fostr The CEA full output string corresponding to the test conditions
     #
-    #
-    #
-    #
+    #  @returns         A tuple consisting of the temperatures at the three standard engine stations
     def get_temperatures(self, cea_fostr):
-        temperature_results = re.search(r"T, K\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_string)
+        temperature_results = re.search(r"T, K\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
         temperature_chamber = float(temperature_results(1))
         temperature_throat  = float(temperature_results(2))
         temperature_exit    = float(temperature_results(3))
