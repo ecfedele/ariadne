@@ -6,6 +6,8 @@ Scratch/*
 # Ignore Python & Spyder temp files
 # --------------------------------------------------------------------------------------------------------------- #
 ModelBuilding/__pycache__/
+ModelBuilding/__pycache__/*
+ModelBuilding/__pycache__/*.cpython-39.pyc
 ModelBuilding/TestingOutputs/
 
 # Ignore LaTeX temp files, such as *.aux, *.bbl, etc.

@@ -158,8 +158,8 @@ class CeaDatasetGenerator:
     #  @returns         A tuple consisting of the pressure at the engine throat and the pressure at nozzle exit
     def get_pressures(self, cea_fostr):
         pressure_results = re.search(r"P, BAR\s*\d+.\d+\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
-        pressure_throat  = float(pressure_results(1))
-        pressure_exit    = float(pressure_results(2))
+        pressure_throat  = float(pressure_results.group(1))
+        pressure_exit    = float(pressure_results.group(2))
         return (pressure_throat, pressure_exit)
 
     ## Uses grouping regular expressions to extract the standard station molar masses from the CEA full output.
@@ -171,9 +171,9 @@ class CeaDatasetGenerator:
     #                   stations
     def get_molar_masses(self, cea_fostr):
         molar_mass_results = re.search(r"M, \(1/n\)\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
-        molar_mass_chamber = float(molar_mass_results(1))
-        molar_mass_throat  = float(molar_mass_results(2))
-        molar_mass_exit    = float(molar_mass_results(3))
+        molar_mass_chamber = float(molar_mass_results.group(1))
+        molar_mass_throat  = float(molar_mass_results.group(2))
+        molar_mass_exit    = float(molar_mass_results.group(3))
         return (molar_mass_chamber, molar_mass_throat, molar_mass_exit)
 
     ## Uses grouping regular expressions to extract the standard station adiabatic indexes (ratios of specific 
@@ -186,9 +186,9 @@ class CeaDatasetGenerator:
     #                   engine stations
     def get_adiabat(self, cea_fostr):
         adiabat_results = re.search(r"GAMMAs\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
-        adiabat_chamber = float(adiabat_results(1))
-        adiabat_throat  = float(adiabat_results(2))
-        adiabat_exit    = float(adiabat_results(3))
+        adiabat_chamber = float(adiabat_results.group(1))
+        adiabat_throat  = float(adiabat_results.group(2))
+        adiabat_exit    = float(adiabat_results.group(3))
         return (adiabat_chamber, adiabat_throat, adiabat_exit)
 
     ## Uses grouping regular expressions to extract the standard station temperature values from the CEA full 
@@ -200,7 +200,7 @@ class CeaDatasetGenerator:
     #  @returns         A tuple consisting of the temperatures at the three standard engine stations
     def get_temperatures(self, cea_fostr):
         temperature_results = re.search(r"T, K\s*(\d+.\d+)\s*(\d+.\d+)\s*(\d+.\d+)", cea_fostr)
-        temperature_chamber = float(temperature_results(1))
-        temperature_throat  = float(temperature_results(2))
-        temperature_exit    = float(temperature_results(3))
+        temperature_chamber = float(temperature_results.group(1))
+        temperature_throat  = float(temperature_results.group(2))
+        temperature_exit    = float(temperature_results.group(3))
         return (temperature_chamber, temperature_throat, temperature_exit)
