@@ -6,7 +6,7 @@ Under the hood, Ariadne employs a novel deep learning-based model to perform rea
 While Ariadne is still in its infant stages, it is intended that it will provide a comprehensive treatment of the core elements of the preliminary rocket engine design process:
 
 1. **Initial design planning**, such as thrust and mass flow rate determination, basic statistical estimates of physical parameters, operating point selection and more
-2. **Thrust chamber geometry**, using a standard Rao convergent-divergent nozzle topology and information garnered from basic heat flux studies
+2. **Thrust chamber geometry**, using a standard Rao-type convergent-divergent nozzle topology and information garnered from basic heat flux studies
 3. **Basic heat transfer analysis**, particularly for expander-cycle engines, where maximizing working fluid heat recovery is paramount
 4. **Basic operating cycle balancing**, with options for gas generator (GG), staged combustion (SC), expander and combustion tap-off (CTO) cycles and accounting for permanent, nonrecoverable pressure losses and losses associated with pumping hardware
 5. **Overall performance estimation and off-design-point (ODP) characterization**, particularly useful in throttling or wideband-operation applications
@@ -15,7 +15,11 @@ While Ariadne is still in its infant stages, it is intended that it will provide
 
 Due to limitations with GitHub's license recognition, only one license could be assigned to this repository. However, the various materials contained herein are licensed according to their type; all programming code, including that found under [`ModelBuilding/`](https://github.com/ecfedele/ariadne/tree/main/ModelBuilding) and [`WpfApp/`](https://github.com/ecfedele/ariadne/tree/main/WpfApp), is licensed under [version 3 of the GNU General Public License (GPL)](https://www.gnu.org/licenses/gpl-3.0.en.html), whereas the documentation is licensed separately:
 
-- Materials under [`Documentation/Thesis`](), being related to the proof-of-concept academic work I am preparing about Ariadne's design, are licensed under the [Creative Commons license, attribution/non-commercial/sharealike, version 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-- Materials under [`Documentation/UsersGuide`]() are licensed under the [GNU Free Documentation License, version 1.3](https://www.gnu.org/licenses/fdl-1.3.txt).
+- Materials under [`Documentation/Thesis`](https://github.com/ecfedele/ariadne/tree/main/Documentation/Thesis), being related to the proof-of-concept academic work I am preparing about Ariadne's design, are licensed under the [Creative Commons license, attribution/non-commercial/sharealike, version 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+- Materials under [`Documentation/UsersGuide`](https://github.com/ecfedele/ariadne/tree/main/Documentation/UsersGuide) (not yet composed) are licensed under the [GNU Free Documentation License, version 1.3](https://www.gnu.org/licenses/fdl-1.3.txt).
 
 The plaintext versions of these licenses are placed, for the viewer's reference, in the root directory of this repository.
+
+## Installation and Configuration
+
+*Please note that an active Python configuration is not required beyond anything which may be required for bare .NET dependencies. The programs found in [`ModelBuilding/`](https://github.com/ecfedele/ariadne/tree/main/ModelBuilding) are solely for preparation of the neural network models and, once trained, are not necessary for proper operation of the main Ariadne program.*
